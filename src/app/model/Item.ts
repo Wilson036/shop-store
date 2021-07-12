@@ -4,10 +4,10 @@ export interface Item {
   owner: string;
   tel: string;
   fax: string;
-  mobile?: string;
-  address?: string;
+  mobile: string | null;
+  address: string | null;
   evaluation: string;
-  remarks?: string;
+  remarks: string | null;
   empName: string;
   createDate: Date;
   createUser: string;
