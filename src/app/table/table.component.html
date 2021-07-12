@@ -1,0 +1,38 @@
+<div class="card">
+    <p-table [value]="stores" [paginator]="true" [rows]="3" [showCurrentPageReport]="true"  dataKey="id">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>選取</th>
+          <th>店家名稱</th>
+          <th>負責人</th>
+          <th>電話</th>
+          <th>手機</th>
+          <th>評價</th>
+          <th>備註</th>
+          <th>異動人員</th>
+          <th>異動日期</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-store>
+        <tr>
+          <td>
+            <p-tableRadioButton [value]="store" (click)="setValues(store)"></p-tableRadioButton>
+          </td>
+          <td>{{store.storeId}}</td>
+          <td>{{store.storeName}}</td>
+          <td>{{store.owner}}</td>
+          <td>{{store.tel}}</td>
+          <td>{{store.evaluation}}</td>
+          <td>{{store.remarks}}</td>
+          <td>{{store.createUser}}</td>
+          <td>{{store.createDate | date:'yyyy-MM-dd'}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+    </p-table>
+  </div>
