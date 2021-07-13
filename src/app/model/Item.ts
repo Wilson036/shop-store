@@ -1,5 +1,5 @@
 export interface Item {
-  storeId: number;
+  storeId?: number;
   storeName: string;
   owner: string;
   tel: string;
@@ -9,7 +9,7 @@ export interface Item {
   evaluation: string;
   remarks: string | null;
   empName: string;
-  createDate: Date;
+  createDate?: Date;
   createUser: string;
   msgName: string | null;
 }

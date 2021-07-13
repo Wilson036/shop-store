@@ -44,4 +44,26 @@ export class StoreService {
 
     return of(response);
   }
+
+  createNewStores(item: Item): Observable<Response> {
+    const store: Item = {
+      storeId: this.stores.length + 1,
+      ...item,
+      createDate: new Date(),
+    };
+    this.stores.push(store);
+    const response: Response = {
+      isSuccess: true,
+      returnCode: null,
+      returnMessage: null,
+      data: {
+        pageSize: null,
+        pageNumber: null,
+        totalPage: null,
+        totalCount: null,
+        items: this.stores,
+      },
+    };
+    return of(response);
+  }
 }

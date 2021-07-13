@@ -1,9 +1,30 @@
 <div>
     <h1>店家維護作業</h1>
-    <button pButton pRipple type="button" label="新增" class="p-button-info" ></button>
-    <button pButton pRipple type="button" label="清除" class="p-button-raised p-button-secondary p-button-text"></button>
-    <button pButton pRipple type="button" label="回上一頁" class="p-button-raised p-button-secondary p-button-text" (click)="back()"></button>
+    <div class="main">
+       
+        <form [formGroup]="storeForm">
+            <input type="text" pInputText placeholder="*店家資訊"  formControlName="storeName" > 
+            <input type="text" pInputText placeholder="負責人"  formControlName="owner" > 
+            <input type="text" pInputText placeholder="＊電話"  formControlName="tel" > 
+            <input type="text" pInputText placeholder="傳真"  formControlName="fax" > 
+            <input type="text" pInputText placeholder="手機"  formControlName="mobile" > 
+            <input type="text" pInputText placeholder="地址"  formControlName="address" > 
+            <h5>評價</h5>
+           <select formControlName="evaluation">
+               <option *ngFor="let option of options" [value]="option.value">{{option.label}}</option>
+           </select> 
+           <input type="text" pInputText placeholder="備註"  formControlName="remarks" > 
+            <h5>異動日期</h5>
+            <input type="text" pInputText [value]="date |  date:'yyyy-MM-dd'" disabled> 
     
-    
+        </form>
+        <div class="btnDiv">
+            <button pButton pRipple type="button" label="新增" class="p-button-info" (click)="addStore()"></button>
+            <button pButton pRipple type="button" label="清除" class="p-button-raised p-button-secondary p-button-text" (click)="reset()"></button>
+            <button pButton pRipple type="button" label="回上一頁" class="p-button-raised p-button-secondary p-button-text" (click)="back()"></button>
+        </div>
+    </div>
+   
+   
 </div>
 <router-outlet></router-outlet>
