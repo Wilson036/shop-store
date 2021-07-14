@@ -12,12 +12,14 @@ import { FormComponent } from './form/form.component';
 import { TableComponent } from './table/table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/api';
 @NgModule({
   declarations: [AppComponent, FormComponent, TableComponent, MainComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     ButtonModule,
@@ -26,7 +28,7 @@ import { MainComponent } from './main/main.component';
     ToastModule,
     InputTextModule,
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

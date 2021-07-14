@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { StoreService } from '../store.service';
 import { Response } from '../model/Response';
 
@@ -19,16 +20,20 @@ export class FormComponent implements OnInit {
 
   date = new Date();
   storeForm = new FormGroup({
-    storeName: new FormControl('', Validators.required),
-    owner: new FormControl(''),
-    tel: new FormControl('', Validators.required),
-    fax: new FormControl(''),
-    mobile: new FormControl(''),
-    address: new FormControl(''),
-    evaluation: new FormControl(''),
-    remarks: new FormControl(''),
+    storeName: new FormControl('super google', Validators.required),
+    owner: new FormControl('wilson'),
+    tel: new FormControl('021234567', Validators.required),
+    fax: new FormControl('021234456'),
+    mobile: new FormControl('091234556'),
+    address: new FormControl('taipei'),
+    evaluation: new FormControl('1'),
+    remarks: new FormControl('讚讚讚'),
   });
-  constructor(private router: Router, private storeService: StoreService) {}
+  constructor(
+    private router: Router,
+    private messageService: MessageService,
+    private storeService: StoreService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -40,15 +45,29 @@ export class FormComponent implements OnInit {
       .createNewStores(this.storeForm.value)
       .subscribe((resp: Response) => {
         if (resp.isSuccess) {
-          this.router.navigate(['']);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Message Content',
+          });
         }
       });
   }
   reset() {
     this.storeForm.reset();
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Message Content',
+    });
   }
 
   back() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Message Content',
+    });
     this.router.navigate(['']);
   }
 }

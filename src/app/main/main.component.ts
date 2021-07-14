@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Item } from '../model/item';
 import { StoreService } from '../store.service';
+import { MessageService } from 'primeng/api';
 import { Request } from '../model/Request';
 import { Response } from '../model/Response';
 
@@ -13,7 +14,11 @@ import { Response } from '../model/Response';
 export class MainComponent implements OnInit {
   stores: Item[] = [];
 
-  constructor(private storeService: StoreService, private router: Router) {}
+  constructor(
+    private storeService: StoreService,
+    private messageService: MessageService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     const res: Request = {
@@ -32,5 +37,13 @@ export class MainComponent implements OnInit {
 
   goFormPage() {
     this.router.navigate(['new']);
+  }
+
+  reset() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Message Content',
+    });
   }
 }
