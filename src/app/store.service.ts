@@ -89,6 +89,31 @@ export class StoreService {
   constructor() {}
 
   getStores(res: Request): Observable<Response> {
+    const name = res.storeName;
+    if (name) {
+      this.stores = this.stores.filter(({ storeName }) =>
+        storeName.toLowerCase().includes(name.toLowerCase())
+      );
+    }
+
+    const response: Response = {
+      isSuccess: true,
+      returnCode: null,
+      returnMessage: null,
+      data: {
+        pageSize: null,
+        pageNumber: null,
+        totalPage: null,
+        totalCount: null,
+        items: this.stores,
+      },
+    };
+
+    return of(response);
+  }
+
+  findStoreById(id: number): Observable<Response> {
+    this.stores = this.stores.filter(({ storeId }) => storeId === id);
     const response: Response = {
       isSuccess: true,
       returnCode: null,

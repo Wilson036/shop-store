@@ -6,7 +6,7 @@
             <input id="float-input" type="text" pInputText [(ngModel)]="storeName" >
             <label for="float-input">店家名稱</label>
         </span>
-        <button pButton pRipple type="button" label="查詢" class="p-button-success" [disabled]="storeName.length===0"></button>
+        <button pButton pRipple type="button" label="查詢" class="p-button-success" [disabled]="storeName.length===0" (click)="queryStores()"></button>
         <button pButton pRipple type="button" label="清除" class="p-button-raised p-button-secondary p-button-text" (click)="reset()"></button>
         <button pButton pRipple type="button" label="修改" class="p-button-warning" (click)="modify()"></button>
         <button pButton pRipple type="button" label="新增" class="p-button-info" (click)="goFormPage()"></button>

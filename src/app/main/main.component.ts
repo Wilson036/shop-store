@@ -16,15 +16,10 @@ import { ConfirmationService } from 'primeng/api';
 export class MainComponent implements OnInit {
   stores: Item[] = [];
   storeName = '';
+  tempStores: Item[] = [];
   storeId = 0;
   selectStore: any;
-  res: Request = {
-    storeName: '',
-    page: {
-      pageNumber: '1',
-      pageSize: '3',
-    },
-  };
+
   @ViewChild('dt', { static: true })
   dt!: TableComponent;
   constructor(
@@ -35,7 +30,40 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.storeService.getStores(this.res).subscribe(
+    const res: Request = {
+      storeName: '',
+      page: {
+        pageNumber: '1',
+        pageSize: '3',
+      },
+    };
+    this.storeService.getStores(res).subscribe(
+      (resp: Response) => {
+        if (resp.isSuccess) {
+          this.stores = resp.data?.items || [];
+          this.tempStores = this.stores;
+        }
+      },
+      (err) => {
+        console.error({ err });
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: '發生錯誤',
+        });
+      }
+    );
+  }
+
+  queryStores() {
+    const res: Request = {
+      storeName: this.storeName,
+      page: {
+        pageNumber: '1',
+        pageSize: '3',
+      },
+    };
+    this.storeService.getStores(res).subscribe(
       (resp: Response) => {
         if (resp.isSuccess) {
           this.stores = resp.data?.items || [];
@@ -124,5 +152,6 @@ export class MainComponent implements OnInit {
     this.dt.reset();
     this.storeId = 0;
     this.storeName = '';
+    this.stores = this.tempStores;
   }
 }
