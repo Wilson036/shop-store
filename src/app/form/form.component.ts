@@ -24,9 +24,19 @@ export class FormComponent implements OnInit {
   storeForm = new FormGroup({
     storeName: new FormControl('super google', Validators.required),
     owner: new FormControl('wilson'),
-    tel: new FormControl('021234567', Validators.required),
-    fax: new FormControl('021234456'),
-    mobile: new FormControl('091234556'),
+    tel: new FormControl('021234567', [
+      Validators.required,
+      Validators.pattern(/^[0-9\s]*$/),
+      Validators.maxLength(15),
+    ]),
+    fax: new FormControl('021234456', [
+      Validators.pattern(/^[0-9\s]*$/),
+      Validators.maxLength(15),
+    ]),
+    mobile: new FormControl('091234556', [
+      Validators.pattern(/^[0-9\s]*$/),
+      Validators.maxLength(15),
+    ]),
     address: new FormControl('taipei'),
     evaluation: new FormControl('1'),
     remarks: new FormControl('讚讚讚'),
