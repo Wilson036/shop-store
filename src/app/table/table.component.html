@@ -1,5 +1,5 @@
 <div class="card">
-    <p-table [value]="stores" [paginator]="true" [rows]="3" [showCurrentPageReport]="true"  dataKey="id">
+    <p-table [value]="stores" [paginator]="true"  [(selection)]="storeSelect" [rows]="3" [showCurrentPageReport]="true"  dataKey="storeId" >
       <ng-template pTemplate="header">
         <tr>
           <th>選取</th>
@@ -16,7 +16,7 @@
       <ng-template pTemplate="body" let-store>
         <tr>
           <td>
-            <p-tableRadioButton [value]="store" (click)="setValues(store)"></p-tableRadioButton>
+            <p-tableRadioButton [value]="store" (click)="setValues(store.storeId)"></p-tableRadioButton>
           </td>
           <td>{{store.storeName}}</td>
           <td>{{store.owner}}</td>

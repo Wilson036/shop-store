@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Item } from '../model/item';
 
 @Component({
@@ -12,9 +12,18 @@ export class TableComponent implements OnInit {
   @Input()
   stores: Item[] = [];
 
+  storeSelect = null;
+
+  @Output()
+  SetIdEvent = new EventEmitter<number>();
+
   ngOnInit(): void {}
 
-  setValues(store: Item) {
-    console.log({ store });
+  setValues(storeId: number) {
+    this.SetIdEvent.emit(storeId);
+  }
+
+  reset() {
+    this.storeSelect = null;
   }
 }
