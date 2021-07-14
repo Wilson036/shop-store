@@ -41,17 +41,31 @@ export class FormComponent implements OnInit {
     if (this.storeForm.invalid) {
       return;
     }
-    this.storeService
-      .createNewStores(this.storeForm.value)
-      .subscribe((resp: Response) => {
+    this.storeService.createNewStores(this.storeForm.value).subscribe(
+      (resp: Response) => {
         if (resp.isSuccess) {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: 'Message Content',
+            detail: '新增成功',
+          });
+        } else {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: '新增失敗',
           });
         }
-      });
+      },
+      (err) => {
+        console.error({ err });
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: '發生錯誤',
+        });
+      }
+    );
   }
   reset() {
     this.storeForm.reset();

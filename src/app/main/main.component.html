@@ -8,9 +8,9 @@
         </span>
         <button pButton pRipple type="button" label="查詢" class="p-button-success" [disabled]="storeName.length===0"></button>
         <button pButton pRipple type="button" label="清除" class="p-button-raised p-button-secondary p-button-text" (click)="reset()"></button>
-        <button pButton pRipple type="button" label="修改" class="p-button-warning" ></button>
+        <button pButton pRipple type="button" label="修改" class="p-button-warning" (click)="modify()"></button>
         <button pButton pRipple type="button" label="新增" class="p-button-info" (click)="goFormPage()"></button>
-        <button pButton pRipple type="button" label="刪除" class="p-button-danger"></button>
+        <button pButton pRipple type="button" label="刪除" class="p-button-danger" (click)="delete()"></button>
     </div>
 </div>
 <app-table [stores]="stores"  (SetIdEvent)="getStoreId($event)" #dt></app-table>

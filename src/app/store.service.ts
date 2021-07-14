@@ -126,4 +126,21 @@ export class StoreService {
     };
     return of(response);
   }
+
+  delete(id: number): Observable<Response> {
+    this.stores = this.stores.filter(({ storeId }) => storeId !== id);
+    const response: Response = {
+      isSuccess: true,
+      returnCode: null,
+      returnMessage: null,
+      data: {
+        pageSize: null,
+        pageNumber: null,
+        totalPage: null,
+        totalCount: null,
+        items: this.stores,
+      },
+    };
+    return of(response);
+  }
 }
