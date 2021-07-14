@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { Request } from '../model/Request';
 import { Response } from '../model/Response';
 import { TableComponent } from '../table/table.component';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-main',
@@ -16,6 +17,7 @@ export class MainComponent implements OnInit {
   stores: Item[] = [];
   storeName = '';
   storeId = 0;
+  selectStore: any;
   res: Request = {
     storeName: '',
     page: {
@@ -27,6 +29,7 @@ export class MainComponent implements OnInit {
   dt!: TableComponent;
   constructor(
     private storeService: StoreService,
+    private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private router: Router
   ) {}
@@ -54,6 +57,9 @@ export class MainComponent implements OnInit {
   }
   getStoreId($event: any) {
     this.storeId = $event;
+    this.selectStore = this.stores.find(
+      ({ storeId }) => storeId === this.storeId
+    );
   }
 
   delete() {
@@ -65,34 +71,42 @@ export class MainComponent implements OnInit {
       });
       return;
     }
-    this.storeService.delete(this.storeId).subscribe(
-      (resp: Response) => {
-        if (resp.isSuccess) {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: '刪除成功',
-          });
-          this.stores = this.stores.filter(
-            ({ storeId }) => storeId !== this.storeId
-          );
-        } else {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: '刪除失敗',
-          });
-        }
+
+    this.confirmationService.confirm({
+      accept: () => {
+        this.storeService.delete(this.storeId).subscribe(
+          (resp: Response) => {
+            if (resp.isSuccess) {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: '刪除成功',
+              });
+              this.stores = this.stores.filter(
+                ({ storeId }) => storeId !== this.storeId
+              );
+            } else {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: '刪除失敗',
+              });
+            }
+          },
+          (err) => {
+            console.error({ err });
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: '發生錯誤',
+            });
+          }
+        );
       },
-      (err) => {
-        console.error({ err });
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: '發生錯誤',
-        });
-      }
-    );
+      reject: () => {
+        this.confirmationService.close();
+      },
+    });
   }
 
   modify() {

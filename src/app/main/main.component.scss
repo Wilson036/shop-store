@@ -10,3 +10,11 @@ input[type="text"] {
 button {
   margin-right: 12px;
 }
+
+.comformBtn {
+  display: flex;
+  justify-content: center;
+}
+.comformBtn button {
+  width: 40%;
+}

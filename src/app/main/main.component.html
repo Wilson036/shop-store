@@ -13,4 +13,19 @@
         <button pButton pRipple type="button" label="刪除" class="p-button-danger" (click)="delete()"></button>
     </div>
 </div>
+<p-confirmDialog #cd [style]="{width: '15vw'}">
+    <ng-template pTemplate="header">
+        <div style="width: 100%;text-align: center;">
+            <div ><i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i></div>
+            <h3>您欲刪除 {{selectStore.storeName}} - {{selectStore.storeId}} , 是否確定刪除？</h3>
+            <p>點選確定後刪除</p>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="comformBtn">
+            <button type="button" pButton pRipple class="p-button-success"  label="確定" (click)="cd.accept()" ></button>
+            <button type="button" pButton  pRipple label="取消" (click)="cd.reject()" ></button>
+        </div>
+    </ng-template>
+</p-confirmDialog>
 <app-table [stores]="stores"  (SetIdEvent)="getStoreId($event)" #dt></app-table>

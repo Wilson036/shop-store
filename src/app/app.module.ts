@@ -12,14 +12,19 @@ import { FormComponent } from './form/form.component';
 import { TableComponent } from './table/table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
+import { DialogModule } from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [AppComponent, FormComponent, TableComponent, MainComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    ConfirmDialogModule,
     BrowserAnimationsModule,
+    DialogModule,
     FormsModule,
     ReactiveFormsModule,
     ButtonModule,
@@ -28,7 +33,7 @@ import { MessageService } from 'primeng/api';
     ToastModule,
     InputTextModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
