@@ -5,6 +5,7 @@ import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
   { path: 'new', component: FormComponent },
+  { path: 'update/:id', component: FormComponent },
   { path: '', component: MainComponent },
 ];
 

@@ -146,6 +146,7 @@ export class MainComponent implements OnInit {
       });
       return;
     }
+    this.router.navigate([`update/${this.storeId}`]);
   }
 
   reset() {

@@ -113,7 +113,7 @@ export class StoreService {
   }
 
   findStoreById(id: number): Observable<Response> {
-    this.stores = this.stores.filter(({ storeId }) => storeId === id);
+    const store = this.stores.filter(({ storeId }) => storeId === id);
     const response: Response = {
       isSuccess: true,
       returnCode: null,
@@ -123,7 +123,7 @@ export class StoreService {
         pageNumber: null,
         totalPage: null,
         totalCount: null,
-        items: this.stores,
+        items: store,
       },
     };
 
@@ -151,7 +151,30 @@ export class StoreService {
     };
     return of(response);
   }
-
+  update(item: Item): Observable<Response> {
+    console.log(this.stores);
+    this.stores = this.stores.map((store) => {
+      if (store.storeId === item.storeId) {
+        store = { ...store, ...item };
+      }
+      console.log({ store });
+      return store;
+    });
+    console.log(this.stores);
+    const response: Response = {
+      isSuccess: true,
+      returnCode: null,
+      returnMessage: null,
+      data: {
+        pageSize: null,
+        pageNumber: null,
+        totalPage: null,
+        totalCount: null,
+        items: this.stores,
+      },
+    };
+    return of(response);
+  }
   delete(id: number): Observable<Response> {
     this.stores = this.stores.filter(({ storeId }) => storeId !== id);
     const response: Response = {

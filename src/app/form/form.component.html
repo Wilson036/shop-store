@@ -20,7 +20,8 @@
     
         </form>
         <div class="btnDiv">
-            <button pButton pRipple type="button" label="新增" class="p-button-info" (click)="addStore()"></button>
+            <button pButton pRipple type="button" label="新增" class="p-button-info" (click)="addStore()" *ngIf="!storeId"></button>
+            <button pButton pRipple type="button" label="修改" class="p-button-info" (click)="update()" *ngIf="storeId"></button>
             <button pButton pRipple type="button" label="清除" class="p-button-raised p-button-secondary p-button-text" (click)="reset()"></button>
             <button pButton pRipple type="button" label="回上一頁" class="p-button-raised p-button-secondary p-button-text" (click)="back()"></button>
         </div>
